@@ -64,4 +64,9 @@ def main():
     tamago.activity_comecar()
     
 if __name__ == "__main__":
-    main()
+    if quantidade <= 1:
+        print("A pasta Muscis esta sem arquivos, precisa de 2 ou mais arquivos oara funcionar")
+        input()
+        RandomMusics.programa = False
+    else:
+        main()
