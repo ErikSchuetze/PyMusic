@@ -11,8 +11,8 @@ class RandomMusics:
     quantidade = len(arquivos)
     programa = True
 
-    def musgasAleatoria(self, arquivos):
-        self.n, self.m = random.choice(arquivos)
+    def musgasAleatoria(self):
+        self.n, self.m = random.choice(self.arquivos)
         
     def status(self):
         print(f"""
