@@ -56,11 +56,12 @@ Para parar aperte CTRL + C
 
 def main():
     tamago = RandomMusics
-    def run(sc):
-        tamago.pass_time()
+    
+    t = threading.Thread(target=tamago.run())
     
     while tamago.programa:
-        tamago.run()
+        t.start()
+    tamago.activity_comecar()
     
 if __name__ == "__main__":
     main()
