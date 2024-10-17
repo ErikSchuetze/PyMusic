@@ -65,7 +65,7 @@ def main():
     
 if __name__ == "__main__":
     if quantidade <= 1:
-        print("A pasta Muscis esta sem arquivos, precisa de 2 ou mais arquivos oara funcionar")
+        print("A pasta Muscis esta sem arquivos, precisa de 2 ou mais arquivos para funcionar")
         input()
         RandomMusics.programa = False
     else:
