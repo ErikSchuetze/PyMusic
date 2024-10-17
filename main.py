@@ -61,7 +61,7 @@ def main():
     
     while tamago.programa:
         t.start()
-    tamago.activity_comecar()
+        tamago.activity_comecar()
     
 if __name__ == "__main__":
     if quantidade <= 1:
