@@ -29,6 +29,7 @@ _____________________________
         )
         
     def activity_voltar(self):
+
         self.n = self.m
         
     def activity_pular(self):
