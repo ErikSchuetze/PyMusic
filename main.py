@@ -10,63 +10,76 @@ class RandomMusics:
     arquivos = os.listdir(pasta)
     quantidade = len(arquivos)
     programa = True
-
+    n = "Ainda nada"
+    
     def musgasAleatoria(self):
-        self.n, self.m = random.choice(self.arquivos)
-        
+        self.n = random.choice(self.arquivos)
+        play = self.n.find(".")
+        if self.n[play:] == ".mp3":
+            pass
+        else:
+            self.musgasAleatoria()
+            
     def status(self):
         print(f"""
 Musica no momento: "{self.n}"
 Para parar aperte CTRL + C
-""")
+_____________________________
+        """
+        )
         
     def activity_voltar(self):
         self.n = self.m
         
-    def activity_pular(self, arquivos):
+    def activity_pular(self):
         self.m = self.n
-        self.n = random.choice(arquivos)
+        self.musgasAleatoria()
+        self.activity_comecar()
+        
 
     def activity_pausar(self):
         print("Desculpe, eu ainda não achei como pausar musica com o playsound python")
 
-    def activity_comecar(self):
-        print("Por eu não entender como faz para pausar, essa e a função de pausar estão inativas")
-
     def activity_parar(self):
         self.programa = False
+       
+    def activity_comecar(self):
+        self.musgasAleatoria()
+        playsound(f"./random music/Music/{self.n}")
+        
 
-
-    def run():
+    def run(self):
+        self.clear()
+        self.status()
         question = [
             inquirer.List(
                 "activity",
-                message="O quer fazer?",
                 choices=["Voltar", "Pausar", "Comecar", "Parar", "Pular",],
             ),
         ]
         answer = inquirer.prompt(question)
         activity_name = "activity_{}".format(answer.get("activity")).lower()
-        activity = getattr(activity_name, lambda: "Invalid activity")
-        (status, sleep) = activity()
+        activity = threading.Thread(target=getattr(self, activity_name, lambda: "Invalid activity"))
+        (status) = activity.start()
         print(status)
     
-    def começar(self):
-        playsound(f"./random music/Music/{self.n}")
+    def clear(self):
+        sys = os.name
+        if sys =="nt":
+           _ = os.system('cls')
+        else:
+           _ = os.system('clear')
+
 
 def main():
-    tamago = RandomMusics
+    tamago = RandomMusics()
     
-    t = threading.Thread(target=tamago.run())
-    
+    t = threading.Thread(target=tamago.activity_comecar)
+    t.start()
+    tamago.run()
+
     while tamago.programa:
-        t.start()
-        tamago.activity_comecar()
+        tamago.run()
     
 if __name__ == "__main__":
-    if quantidade <= 1:
-        print("A pasta Muscis esta sem arquivos, precisa de 2 ou mais arquivos para funcionar")
-        input()
-        RandomMusics.programa = False
-    else:
-        main()
+   main()
