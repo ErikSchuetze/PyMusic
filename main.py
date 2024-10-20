@@ -46,7 +46,7 @@ _____________________________
        
     def activity_comecar(self):
         self.musgasAleatoria()
-        playsound(f"./random music/Music/{self.n}")
+        playsound(self.pasta + self.n)
         
 
     def run(self):
